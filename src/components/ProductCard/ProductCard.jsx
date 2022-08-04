@@ -12,16 +12,11 @@ const ProductCard = ({ product }) => {
     const images = require.context("../../assets/images", true);
 
     if (data) {
-        const path = "../../assets/images" + data.thumbnail;
-        const image = images(`.${data.thumbnail}`).default;
-        console.log(path);
+        const image = images(`.${data.images[0]}`);
         return (
             <div className={styles.ProductCard}>
                 <h2>{data.name}</h2>
-                <img
-                    src={require("../../assets/images/iPhone_11/iPhone_11_thumbnail.jpeg")}
-                    alt=""
-                />
+                <img src={image} alt="" />
                 <p>Price: {data.price}</p>
             </div>
         );
