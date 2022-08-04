@@ -1,3 +1,9 @@
 .ProductCard {
     border: 1px solid black;
+    min-width: 300px;
+    width: calc(100% / 3);
+
+    & > img {
+        height: 300px;
+    }
 }
