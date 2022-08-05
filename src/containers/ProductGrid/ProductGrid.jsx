@@ -12,13 +12,18 @@ const ProductGrid = () => {
         setProducts(data);
     };
 
+    const sortData = (arr) => {
+        const sorted = arr.sort((a, b) => a.price - b.price);
+        return sorted;
+    };
+
     useEffect(() => {
         getData();
     }, []);
 
     return (
         <div className={styles.ProductGrid}>
-            {products.map((product) => {
+            {sortData(products).map((product) => {
                 return <ProductCard key={product.id} product={product} />;
             })}
             <ProductCard />
