@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./ProductCard.module.scss";
 
 const ProductCard = ({ product }) => {
@@ -16,7 +16,13 @@ const ProductCard = ({ product }) => {
         return (
             <div className={styles.ProductCard}>
                 <h2>{data.name}</h2>
-                <img src={image} alt="" />
+                <NavLink to={"/product/" + product.id.toString()}>
+                    <img
+                        className={styles.ProductCard__Thumbnail}
+                        src={image}
+                        alt=""
+                    />
+                </NavLink>
                 <p>Price: {data.price}</p>
             </div>
         );

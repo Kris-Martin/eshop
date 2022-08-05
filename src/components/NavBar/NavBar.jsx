@@ -5,7 +5,6 @@ const NavBar = () => {
     return (
         <nav className={styles.NavBar}>
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/product">Product</NavLink>
             <NavLink to="/cart">Cart</NavLink>
         </nav>
     );

@@ -1,6 +1,5 @@
 const products = [
     {
-        id: 1,
         name: "iPhone 13 Pro",
         brand: "Apple",
         price: 1699,
@@ -25,7 +24,6 @@ const products = [
         favourite: false,
     },
     {
-        id: 2,
         name: "iPhone 13",
         brand: "Apple",
         price: 1349,
@@ -58,7 +56,6 @@ const products = [
         favourite: false,
     },
     {
-        id: 3,
         name: "iPhone SE",
         brand: "Apple",
         price: 719,
@@ -81,7 +78,6 @@ const products = [
         favourite: false,
     },
     {
-        id: 4,
         name: "iPhone 12",
         brand: "Apple",
         price: 999,
@@ -107,7 +103,6 @@ const products = [
         favourite: false,
     },
     {
-        id: 5,
         name: "iPhone 11",
         brand: "Apple",
         price: 849,
