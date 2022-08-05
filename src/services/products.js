@@ -127,5 +127,30 @@ const products = [
         ],
         favourite: false,
     },
+    {
+        name: "iPhone 13 mini",
+        brand: "Apple",
+        price: 1199,
+        stock: 100,
+        category: "Smartphones",
+        colour: ["Green", "Pink", "Blue", "Midnight", "White", "Product Red"],
+        details: [
+            "5.4-inch Super Retina XDR display",
+            "Dual-camera system: Wide and Ultra Wide cameras with Night mode, Portrait mode, and 4K video up to 60 fps",
+            "12MP TrueDepth front camera with Portrait mode, 4K video, and slo-mo",
+            "A15 Bionic chip with new 16-core Neural Engine",
+            "Face ID for secure authentication and Apple Pay",
+        ],
+        thumbnail: "/iPhone_mini/iPhone_mini_green.jpeg",
+        images: [
+            "/iPhone_mini/iPhone_mini_green.jpeg",
+            "/iPhone_mini/iPhone_mini_pink.jpeg",
+            "/iPhone_mini/iPhone_mini_blue.jpeg",
+            "/iPhone_mini/iPhone_mini_midnight.jpeg",
+            "/iPhone_mini/iPhone_mini_white.jpeg",
+            "/iPhone_mini/iPhone_mini_red.jpeg",
+        ],
+        favourite: false,
+    },
 ];
 export default products;
