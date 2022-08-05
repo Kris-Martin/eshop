@@ -32,8 +32,8 @@ const Product = () => {
                 <h2>Colours: {product.colour.join(", ")}</h2>
                 <h2>Details: </h2>
                 <ul>
-                    {product.details.map((item) => (
-                        <li>{item}</li>
+                    {product.details.map((item, i) => (
+                        <li key={i}>{item}</li>
                     ))}
                 </ul>
             </div>

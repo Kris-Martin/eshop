@@ -16,8 +16,6 @@ export const seedProducts = async () => {
 };
 
 export const getProducts = async () => {
-    seedProducts();
-
     const collectionRef = firestore.collection("products");
 
     const querySnap = await collectionRef.get();

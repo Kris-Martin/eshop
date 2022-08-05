@@ -1,6 +1,6 @@
 import styles from "./ProductGrid.module.scss";
 import ProductCard from "../../components/ProductCard";
-import { getProducts } from "../../services/server.js";
+import { seedProducts, getProducts } from "../../services/server.js";
 import { useEffect, useContext } from "react";
 import { ProductContext } from "../../context/ProductContext.jsx";
 
@@ -18,6 +18,7 @@ const ProductGrid = () => {
     };
 
     useEffect(() => {
+        seedProducts();
         getData();
     }, []);
 
