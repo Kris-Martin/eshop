@@ -23,7 +23,14 @@ const ProductCard = ({ product }) => {
                         alt=""
                     />
                 </NavLink>
-                <p>Price: {data.price}</p>
+                <p>
+                    Price:{" "}
+                    {data.price.toLocaleString("en-AU", {
+                        style: "currency",
+                        currency: "AUD",
+                        minimumFractionDigits: 2,
+                    })}
+                </p>
             </div>
         );
     }
