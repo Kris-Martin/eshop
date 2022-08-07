@@ -1,3 +1,7 @@
 .Home {
     border: 1px solid black;
+
+    & > h1 {
+        padding: 0.5em 0;
+    }
 }
