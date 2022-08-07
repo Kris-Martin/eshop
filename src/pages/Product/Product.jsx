@@ -84,7 +84,14 @@ const Product = () => {
                     })}
                 </h2>
                 <h2>Qty Available: {product.stock}</h2>
-                <h2>Colours: {product.colour.join(", ")}</h2>
+                <div className={styles.Product__Colours}>
+                    <label htmlFor="colours">Colours: </label>
+                    <select name="colours" id="colours">
+                        {product.colour.map((c, i) => {
+                            return <option key={i}>{c}</option>;
+                        })}
+                    </select>
+                </div>
                 <h2>Details: </h2>
                 <ul>
                     {product.details.map((item, i) => (

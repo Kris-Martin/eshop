@@ -43,8 +43,22 @@
     }
 
     & > h2 {
+        font-size: 1.2rem;
         margin-top: 0.5em;
         text-align: left;
+    }
+
+    &__Colours {
+        display: flex;
+        align-items: center;
+        font-size: 1.2rem;
+        margin-top: 0.5em;
+        font-weight: bold;
+
+        & > select {
+            font-size: 1.2rem;
+            margin-left: 0.5em;
+        }
     }
 
     & > ul {
