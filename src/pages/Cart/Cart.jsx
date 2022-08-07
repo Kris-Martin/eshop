@@ -1,8 +1,10 @@
 import styles from "./Cart.module.scss";
-import { useEffect, useState } from "react";
-import { getCart, updateCart } from "../../services/server.js";
+import { useEffect, useState, useContext } from "react";
+import { getCart, updateCart, updateProduct } from "../../services/server.js";
+import { ProductContext } from "../../context/ProductContext.jsx";
 
 const Cart = () => {
+    const { products, setProducts } = useContext(ProductContext);
     const [cart, setCart] = useState("");
 
     const getData = async () => {
@@ -14,6 +16,27 @@ const Cart = () => {
         getData();
     }, []);
 
+    const getProduct = (id) => {
+        const product = products.filter((product) => product.id === id)[0];
+        return product;
+    };
+
+    const deleteItem = async (e) => {
+        const updatedCart = await getCart();
+        const toDelete = Number(e.target.parentElement.id);
+        console.log(toDelete);
+
+        const productId = cart[toDelete].productId;
+        const product = getProduct(productId);
+        product.stock += Number(cart[toDelete].quantity);
+        await updateProduct(product, productId);
+
+        const updated = cart.filter((p, i) => i !== toDelete);
+        updatedCart.products = updated;
+        setCart(updated);
+        await updateCart(updatedCart);
+    };
+
     // console.log(cart);
 
     if (cart) {
@@ -22,7 +45,7 @@ const Cart = () => {
                 <h1>Cart</h1>
                 {cart.map((p, i) => {
                     return (
-                        <div key={i} className={styles.Cart__Item}>
+                        <div key={i} className={styles.Cart__Item} id={i}>
                             <h2>{p.name}</h2>
                             <p>{p.colour}</p>
                             <button className={styles.Cart__Button}>-</button>
@@ -47,7 +70,12 @@ const Cart = () => {
                                     },
                                 )}
                             </p>
-                            <button className={styles.Cart__Button}>x</button>
+                            <button
+                                className={styles.Cart__Button}
+                                onClick={deleteItem}
+                            >
+                                x
+                            </button>
                         </div>
                     );
                 })}
