@@ -22,6 +22,7 @@ const products = [
             "/iPhone_13_Pro/iPhone_13_Pro_sierra_blue.jpeg",
         ],
         favourite: false,
+        featured: true,
     },
     {
         name: "iPhone 13",
@@ -54,6 +55,7 @@ const products = [
             "/iPhone_13/iPhone_13_red.jpeg",
         ],
         favourite: false,
+        featured: true,
     },
     {
         name: "iPhone SE",
@@ -76,6 +78,7 @@ const products = [
             "/iPhone_SE/iPhone_SE_red.jpeg",
         ],
         favourite: false,
+        featured: false,
     },
     {
         name: "iPhone 12",
@@ -101,6 +104,7 @@ const products = [
             "/iPhone_12/iPhone_12_red.jpeg",
         ],
         favourite: false,
+        featured: false,
     },
     {
         name: "iPhone 11",
@@ -126,6 +130,7 @@ const products = [
             "/iPhone_11/iPhone_11_red.jpeg",
         ],
         favourite: false,
+        featured: false,
     },
     {
         name: "iPhone 13 mini",
@@ -151,6 +156,7 @@ const products = [
             "/iPhone_mini/iPhone_mini_red.jpeg",
         ],
         favourite: false,
+        featured: true,
     },
 ];
 export default products;
