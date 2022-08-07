@@ -2,12 +2,13 @@ import styles from "./Product.module.scss";
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext.jsx";
-import { updateCart, updateProduct } from "../../services/server.js";
+import { updateCart, getCart, updateProduct } from "../../services/server.js";
 
 const Product = () => {
     const { products, setProducts } = useContext(ProductContext);
     const { productId } = useParams();
     const [product, setProduct] = useState("");
+    const [colour, setColour] = useState("");
     const [quantity, setQuantity] = useState(0);
 
     const getProduct = () => {
@@ -23,8 +24,21 @@ const Product = () => {
         setQuantity(n);
     };
 
+    const handleColourChange = (e) => {
+        const colourUpdate = e.target.value;
+        console.log(colourUpdate);
+        setColour(colourUpdate);
+    };
+
     const handleAddToCart = async () => {
-        await updateCart({ productId: productId, quantity: quantity });
+        const selectedColour = colour === "" ? product.colour[0] : colour;
+        const cart = await getCart();
+        cart.products = cart.products.concat({
+            productId: productId,
+            colour: selectedColour,
+            quantity: quantity,
+        });
+        await updateCart(cart);
         console.log(quantity, productId);
         const productUpdate = { ...product };
         productUpdate["stock"] = product.stock - quantity;
@@ -86,7 +100,11 @@ const Product = () => {
                 <h2>Qty Available: {product.stock}</h2>
                 <div className={styles.Product__Colours}>
                     <label htmlFor="colours">Colours: </label>
-                    <select name="colours" id="colours">
+                    <select
+                        name="colours"
+                        id="colours"
+                        onChange={handleColourChange}
+                    >
                         {product.colour.map((c, i) => {
                             return <option key={i}>{c}</option>;
                         })}
