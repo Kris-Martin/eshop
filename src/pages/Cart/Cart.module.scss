@@ -1,3 +1,38 @@
 .Cart {
     border: 1px solid black;
+
+    & > h1 {
+        padding: 0.5em 0;
+    }
+
+    &__Item {
+        border: 1px solid black;
+        padding: 0.5em 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    &__Button {
+        font-size: 1rem;
+        padding: 0.05em 0.4em;
+        background-color: white;
+        border: 1px solid black;
+        cursor: pointer;
+
+        &:hover {
+            background-color: black;
+            color: white;
+        }
+
+        &:active {
+            font-weight: bold;
+        }
+    }
+
+    &__Total {
+        text-align: right;
+        margin-right: 2em;
+        padding: 0.5em 0;
+    }
 }
