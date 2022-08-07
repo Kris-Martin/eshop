@@ -1,6 +1,11 @@
 import styles from "./Cart.module.scss";
 import { useEffect, useState, useContext } from "react";
-import { getCart, updateCart, updateProduct } from "../../services/server.js";
+import {
+    getCart,
+    getProducts,
+    updateCart,
+    updateProduct,
+} from "../../services/server.js";
 import { ProductContext } from "../../context/ProductContext.jsx";
 
 const Cart = () => {
@@ -8,8 +13,10 @@ const Cart = () => {
     const [cart, setCart] = useState("");
 
     const getData = async () => {
-        const data = await getCart();
-        setCart(data.products);
+        const productData = await getProducts();
+        setProducts(productData);
+        const cartData = await getCart();
+        setCart(cartData.products);
     };
 
     useEffect(() => {
@@ -41,36 +48,36 @@ const Cart = () => {
         const updatedCart = await getCart();
         const toChange = Number(e.target.parentElement.id);
         const productId = cart[toChange].productId;
-        const currentQuantity = cart[toChange].quantity + 1;
-
         const product = getProduct(productId);
+        const currentQuantity = Number(cart[toChange].quantity) + 1;
+
         if (currentQuantity > product.stock)
             return alert(
                 `Only ${product.stock} available, please reduce the size of your order.`,
             );
 
-        product.stock += 1;
+        product.stock -= 1;
         await updateProduct(product, productId);
 
-        updatedCart.products[toChange].quantity += 1;
+        updatedCart.products[toChange].quantity = currentQuantity;
         setCart(updateCart.products);
-        await updateCart(updateCart);
+        await updateCart(updatedCart);
     };
 
     const decreaseItemCount = async (e) => {
         const updatedCart = await getCart();
         const toChange = Number(e.target.parentElement.id);
         const productId = cart[toChange].productId;
-        const currentQuantity = cart[toChange].quantity - 1;
+        const currentQuantity = Number(cart[toChange].quantity) - 1;
         if (currentQuantity === 1) return e.target.disabled;
 
         const product = getProduct(productId);
-        product.stock -= 1;
+        product.stock += 1;
         await updateProduct(product, productId);
 
-        updatedCart.products[toChange].quantity -= 1;
+        updatedCart.products[toChange].quantity = currentQuantity;
         setCart(updateCart.products);
-        await updateCart(updateCart);
+        await updateCart(updatedCart);
     };
 
     if (cart) {
