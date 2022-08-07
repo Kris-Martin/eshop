@@ -33,11 +33,15 @@ const Product = () => {
     const handleAddToCart = async () => {
         const selectedColour = colour === "" ? product.colour[0] : colour;
         const cart = await getCart();
-        cart.products = cart.products.concat({
+        const update = {
             productId: productId,
+            name: product.name,
             colour: selectedColour,
             quantity: quantity,
-        });
+            itemPrice: product.price,
+        };
+        cart.products =
+            cart.products.length > 0 ? cart.products.concat(update) : [update];
         await updateCart(cart);
         console.log(quantity, productId);
         const productUpdate = { ...product };
