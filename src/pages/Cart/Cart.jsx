@@ -37,7 +37,41 @@ const Cart = () => {
         await updateCart(updatedCart);
     };
 
-    // console.log(cart);
+    const increaseItemCount = async (e) => {
+        const updatedCart = await getCart();
+        const toChange = Number(e.target.parentElement.id);
+        const productId = cart[toChange].productId;
+        const currentQuantity = cart[toChange].quantity + 1;
+
+        const product = getProduct(productId);
+        if (currentQuantity > product.stock)
+            return alert(
+                `Only ${product.stock} available, please reduce the size of your order.`,
+            );
+
+        product.stock += 1;
+        await updateProduct(product, productId);
+
+        updatedCart.products[toChange].quantity += 1;
+        setCart(updateCart.products);
+        await updateCart(updateCart);
+    };
+
+    const decreaseItemCount = async (e) => {
+        const updatedCart = await getCart();
+        const toChange = Number(e.target.parentElement.id);
+        const productId = cart[toChange].productId;
+        const currentQuantity = cart[toChange].quantity - 1;
+        if (currentQuantity === 1) return e.target.disabled;
+
+        const product = getProduct(productId);
+        product.stock -= 1;
+        await updateProduct(product, productId);
+
+        updatedCart.products[toChange].quantity -= 1;
+        setCart(updateCart.products);
+        await updateCart(updateCart);
+    };
 
     if (cart) {
         return (
@@ -48,9 +82,19 @@ const Cart = () => {
                         <div key={i} className={styles.Cart__Item} id={i}>
                             <h2>{p.name}</h2>
                             <p>{p.colour}</p>
-                            <button className={styles.Cart__Button}>-</button>
+                            <button
+                                className={styles.Cart__Button}
+                                onClick={decreaseItemCount}
+                            >
+                                -
+                            </button>
                             <p>{p.quantity}</p>
-                            <button className={styles.Cart__Button}>+</button>
+                            <button
+                                className={styles.Cart__Button}
+                                onClick={increaseItemCount}
+                            >
+                                +
+                            </button>
                             <p>
                                 item:{" "}
                                 {p.itemPrice.toLocaleString("en-AU", {
