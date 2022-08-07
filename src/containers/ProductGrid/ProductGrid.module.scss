@@ -1,6 +1,5 @@
 .ProductGrid {
     border: 1px solid black;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
