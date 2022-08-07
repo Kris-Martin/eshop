@@ -9,7 +9,7 @@ const Product = () => {
     const { productId } = useParams();
     const [product, setProduct] = useState("");
     const [colour, setColour] = useState("");
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
 
     const getProduct = () => {
         setProduct(products.filter((product) => product.id === productId)[0]);
@@ -31,6 +31,10 @@ const Product = () => {
     };
 
     const handleAddToCart = async () => {
+        if (quantity > product.stock)
+            return alert(
+                `Only ${product.stock} available, please reduce the size of your order.`,
+            );
         const selectedColour = colour === "" ? product.colour[0] : colour;
         const cart = await getCart();
         const update = {
@@ -76,6 +80,7 @@ const Product = () => {
                         type="number"
                         name="quantity"
                         id="quantity"
+                        min="1"
                         onChange={handleQuantityChange}
                     />
                     <button
