@@ -6,9 +6,16 @@
     justify-content: space-around;
     align-items: center;
 
+    & > * {
+        @media (max-width: 600px) {
+            font-size: 1rem;
+        }
+    }
+
     &__Button {
         font-size: 1rem;
         padding: 0.05em 0.4em;
+        margin: 0 0.2em;
         background-color: white;
         border: 1px solid black;
         cursor: pointer;

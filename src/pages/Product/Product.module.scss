@@ -1,6 +1,5 @@
 .Product {
     padding: 4em;
-    border: 1px solid black;
 
     &__CartButtons {
         margin-top: 1em;
@@ -9,8 +8,16 @@
         align-items: center;
         font-size: 1.2rem;
 
+        @media (max-width: 508px) {
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
         & > * {
             margin-left: 0.5em;
+            @media (max-width: 500px) {
+                margin-top: 0.5em;
+            }
         }
 
         & > input {
