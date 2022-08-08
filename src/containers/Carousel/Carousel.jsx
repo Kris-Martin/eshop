@@ -1,5 +1,5 @@
 import styles from "./Carousel.module.scss";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext.jsx";
 import { getProducts } from "../../services/server.js";
