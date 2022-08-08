@@ -43,7 +43,7 @@ const CartItem = ({ cart, setCart, products, product, i }) => {
 
         updatedCart.products[toChange].quantity = currentQuantity;
         setQuantity(currentQuantity);
-        setCart(updateCart.products);
+        setCart(updatedCart.products);
         await updateCart(updatedCart);
     };
 
@@ -52,7 +52,7 @@ const CartItem = ({ cart, setCart, products, product, i }) => {
         const toChange = Number(e.target.parentElement.id);
         const productId = cart[toChange].productId;
         const currentQuantity = Number(cart[toChange].quantity) - 1;
-        if (currentQuantity === 1) e.target.disabled = true;
+        if (currentQuantity === 0) deleteItem(e);
 
         const product = getProduct(productId);
         product.stock += 1;
@@ -60,7 +60,7 @@ const CartItem = ({ cart, setCart, products, product, i }) => {
 
         updatedCart.products[toChange].quantity = currentQuantity;
         setQuantity(currentQuantity);
-        setCart(updateCart.products);
+        setCart(updatedCart.products);
         await updateCart(updatedCart);
     };
 
