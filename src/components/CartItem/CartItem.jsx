@@ -13,10 +13,10 @@ const CartItem = ({ cart, setCart, products, product, i }) => {
     const deleteItem = async (e) => {
         const updatedCart = await getCart();
         const toDelete = Number(e.target.parentElement.id);
-        console.log(toDelete);
 
         const productId = cart[toDelete].productId;
         const product = getProduct(productId);
+
         product.stock += Number(cart[toDelete].quantity);
         await updateProduct(product, productId);
 
@@ -26,36 +26,23 @@ const CartItem = ({ cart, setCart, products, product, i }) => {
         await updateCart(updatedCart);
     };
 
-    const increaseItemCount = async (e) => {
+    const changeItemCount = async (e) => {
         const updatedCart = await getCart();
         const toChange = Number(e.target.parentElement.id);
+        const changeBy = Number(e.target.value);
+
         const productId = cart[toChange].productId;
         const product = getProduct(productId);
-        const currentQuantity = Number(cart[toChange].quantity) + 1;
+
+        const currentQuantity = Number(cart[toChange].quantity) + changeBy;
 
         if (currentQuantity > product.stock)
             return alert(
                 `Only ${product.stock} available, please reduce the size of your order.`,
             );
-
-        product.stock -= 1;
-        await updateProduct(product, productId);
-
-        updatedCart.products[toChange].quantity = currentQuantity;
-        setQuantity(currentQuantity);
-        setCart(updatedCart.products);
-        await updateCart(updatedCart);
-    };
-
-    const decreaseItemCount = async (e) => {
-        const updatedCart = await getCart();
-        const toChange = Number(e.target.parentElement.id);
-        const productId = cart[toChange].productId;
-        const currentQuantity = Number(cart[toChange].quantity) - 1;
         if (currentQuantity === 0) deleteItem(e);
 
-        const product = getProduct(productId);
-        product.stock += 1;
+        product.stock += changeBy > 0 ? -changeBy : changeBy * -1;
         await updateProduct(product, productId);
 
         updatedCart.products[toChange].quantity = currentQuantity;
@@ -70,14 +57,16 @@ const CartItem = ({ cart, setCart, products, product, i }) => {
             <p>{product.colour}</p>
             <button
                 className={styles.CartItem__Button}
-                onClick={decreaseItemCount}
+                onClick={changeItemCount}
+                value="-1"
             >
                 -
             </button>
             <p>{quantity}</p>
             <button
                 className={styles.CartItem__Button}
-                onClick={increaseItemCount}
+                onClick={changeItemCount}
+                value="1"
             >
                 +
             </button>
