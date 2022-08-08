@@ -20,6 +20,7 @@ function App() {
                         />
                         <Route path="/cart" element={<Cart />} />
                     </Routes>
+                    <NavBar />
                 </div>
             </BrowserRouter>
         </ProductProvider>

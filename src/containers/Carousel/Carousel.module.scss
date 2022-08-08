@@ -5,6 +5,7 @@
     overflow-x: scroll;
     scroll-behavior: smooth;
     margin: 1em 0;
+    background-color: #f5f5f7;
 
     @media (max-width: 600px) {
         flex-direction: column;
