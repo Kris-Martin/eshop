@@ -27,7 +27,6 @@ const ProductGrid = () => {
             {sortData(products).map((product) => {
                 return <ProductCard key={product.id} product={product} />;
             })}
-            <ProductCard />
         </div>
     );
 };
