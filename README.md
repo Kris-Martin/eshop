@@ -1,5 +1,7 @@
 # React e-Shop Website
 
+![eShop UI](eShop_ui.png)
+
 ## Outline
 
 This project is designed to reinforce your React learnings and make sure that you are comfortable with most aspect of the framework.
