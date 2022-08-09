@@ -35,6 +35,8 @@ const Product = () => {
             return alert(
                 `Only ${product.stock} available, please reduce the size of your order.`,
             );
+        if (quantity < 1)
+            return alert("Quantity must be at least 1 to add to cart");
         const selectedColour = colour === "" ? product.colour[0] : colour;
         const cart = await getCart();
         const update = {
@@ -47,7 +49,7 @@ const Product = () => {
         cart.products =
             cart.products.length > 0 ? cart.products.concat(update) : [update];
         await updateCart(cart);
-        console.log(quantity, productId);
+
         const productUpdate = { ...product };
         productUpdate["stock"] = product.stock - quantity;
         setProduct(productUpdate);
@@ -69,7 +71,7 @@ const Product = () => {
 
     if (product) {
         const image = images(`.${product.images[0]}`);
-        // console.log(product);
+
         return (
             <div className={styles.Product}>
                 <img src={image} alt="" />
@@ -81,6 +83,7 @@ const Product = () => {
                         name="quantity"
                         id="quantity"
                         min="1"
+                        value={quantity}
                         onChange={handleQuantityChange}
                     />
                     <button
