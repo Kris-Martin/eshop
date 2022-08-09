@@ -1,22 +1,32 @@
 import styles from "./Product.module.scss";
 import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { getProducts } from "../../services/server.js";
 import { ProductContext } from "../../context/ProductContext.jsx";
 import { updateCart, getCart, updateProduct } from "../../services/server.js";
 
 const Product = () => {
     const { products, setProducts } = useContext(ProductContext);
     const { productId } = useParams();
-    const [product, setProduct] = useState("");
+    const [product, setProduct] = useState(products.filter(getProduct)[0]);
     const [colour, setColour] = useState("");
     const [quantity, setQuantity] = useState(1);
 
-    const getProduct = () => {
-        setProduct(products.filter((product) => product.id === productId)[0]);
+    function getProduct(product) {
+        return product.id === productId;
+    }
+
+    const getData = async () => {
+        if (products.length === 0) {
+            console.log("run");
+            const data = await getProducts();
+            setProducts(data);
+            setProduct(data.filter(getProduct)[0]);
+        }
     };
 
     useEffect(() => {
-        getProduct();
+        getData();
     }, []);
 
     const handleQuantityChange = (e) => {
